@@ -18,7 +18,7 @@
                     <country>{{ $product->attributes->where('name', "Land")->first()->options[0] }}</country>
                 @endif
                 @if($product->attributes->where('name', "Streek")->count() > 0)
-                    <appellation>{{ $product->attributes->where('name', "Streek")->first()->options[0] }}</appellation>
+                    <appellation>{{ ucfirst($product->attributes->where('name', "Streek")->first()->options[0]) }}</appellation>
                 @endif
                 @if($product->attributes->where('name', "Alcoholpercentage")->count() > 0)
                     <alcohol>{{ $product->attributes->where('name', "Alcoholpercentage")->first()->options[0] }}</alcohol>
