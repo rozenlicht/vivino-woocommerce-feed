@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Codexshaper\WooCommerce\Models\Product;
 use Illuminate\Http\Request;
-use App\Services\WoocommerceService;
+use App\Services\WooCommerceService;
 
 class ProductFeedController extends Controller
 {
