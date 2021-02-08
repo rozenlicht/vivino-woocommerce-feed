@@ -15,8 +15,13 @@ class ProductFeedController extends Controller
             return $woo->getByTagSlug('vivino-wijn');
         }))->map(function($product) {
             $product->attributes = collect($product->attributes);
+            $matches = [];
             preg_match('/\b(19|20)\d{2}\b/', $product->name, $matches);
-            $product->vintage = $matches[0];
+            if(count($matches) > 0) {
+                $product->vintage = $matches[0];
+            } else {
+                $product->vintage = null;
+            }
             return $product;
         });
         $view = \View::make('feeds.vivino-feed')->with(compact('products'));

@@ -11,7 +11,9 @@
             @endif
             <extra>
                 <product-id>{{ $product->id }}</product-id>
-                <vintage>{{ $product->vintage }}</vintage>
+                @if($product->vintage)
+                    <vintage>{{ $product->vintage }}</vintage>
+                @endif
                 @if($product->attributes->where('name', "Land")->count() > 0)
                     <country>{{ $product->attributes->where('name', "Land")->first()->options[0] }}</country>
                 @endif
