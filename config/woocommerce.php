@@ -77,5 +77,6 @@ return [
      * Default value vivino-wijn
      *================================================================================.
      */
-    'vivino_tag'            => env('WOOCOMMERCE_VIVINO_TAG', 'vivino-wijn')
+    'vivino_tag'            => env('WOOCOMMERCE_VIVINO_TAG', 'vivino-wijn'),
+    'importer_address'      => env('IMPORTER_ADDRESS')
 ];

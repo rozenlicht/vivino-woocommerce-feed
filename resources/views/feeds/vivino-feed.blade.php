@@ -13,9 +13,28 @@
                 @if($product->attributes->where('name', "Land")->count() > 0)
                     <country>{{ $product->attributes->where('name', "Land")->first()->options[0] }}</country>
                 @endif
+                @if($product->attributes->where('name', "Alcoholpercentage")->count() > 0)
+                    <alcohol>{{ $product->attributes->where('name', "Alcoholpercentage")->first()->options[0] }}</alcohol>
+                @endif
                 @if($product->attributes->where('name', "Kleur")->count() > 0)
                     <color>{{ $product->attributes->where('name', "Kleur")->first()->options[0] }}</color>
                 @endif
+                <contains-added-sulfites>yes</contains-added-sulfites>
+                <importer-address>{{ config('woocommerce.importer_address') }}</importer-address>
+                <contains-milk-allergens>
+                    @if($product->attributes->where('name', "Bevat melkallergenen")->count() > 0)
+                        {{ $product->attributes->where('name', "Bevat melkallergenen")->first()->options[0] === 'Ja' ? 'yes' : 'no' }}
+                    @else
+                        no
+                    @endif
+                </contains-milk-allergens>
+                <contains-egg-allergens>
+                    @if($product->attributes->where('name', "Bevat ei-allergenen")->count() > 0)
+                        {{ $product->attributes->where('name', "Bevat ei-allergenen")->first()->options[0] === 'Ja' ? 'yes' : 'no' }}
+                    @else
+                        no
+                    @endif
+                </contains-egg-allergens>
             </extra>
         </product>
     @endforeach
