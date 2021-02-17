@@ -39,9 +39,6 @@ class ProductFeedController extends Controller
                 $product->wine_name = $this->removeFromString(',', $product->wine_name);
                 $product->wine_name = $this->removeFromString('  ', $product->wine_name);
                 $product->wine_name = $this->removeFromString('  ', $product->wine_name);
-                $product->wine_name = $this->removeFromString('  ', $product->wine_name);
-                $product->wine_name = $this->removeFromString('  ', $product->wine_name);
-                $product->wine_name = $this->removeFromString('  ', $product->wine_name);
             } else {
                 $product->vintage = null;
             }
