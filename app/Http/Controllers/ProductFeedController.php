@@ -27,13 +27,13 @@ class ProductFeedController extends Controller
                 $product->appellation = ucwords($product->attributes->where('name', "Streek")->first()->options[0]);
                 $product->wine_name = $this->removeFromString($product->vintage, $product->name);
                 $product->wine_name = $this->removeFromString($product->appellation, $product->wine_name);
-                foreach($product->attributes->where('name', "Land")->get() as $land) {
+                foreach($product->attributes->where('name', "Land") as $land) {
                     $product->wine_name = $this->removeFromString($land->options[0], $product->wine_name);
                 }
-                foreach($product->attributes->where('name', "Streek")->get() as $land) {
+                foreach($product->attributes->where('name', "Streek") as $land) {
                     $product->wine_name = $this->removeFromString($land->options[0], $product->wine_name);
                 }
-                foreach($product->attributes->where('name', "Merk")->get() as $land) {
+                foreach($product->attributes->where('name', "Merk") as $land) {
                     $product->wine_name = $this->removeFromString($land->options[0], $product->wine_name);
                 }
             } else {
