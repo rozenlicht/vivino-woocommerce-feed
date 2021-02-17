@@ -9,8 +9,8 @@
                 <price>{{ $product->price }}</price>
                 <link>{{ $product->permalink }}</link>
                 <inventory-count>{{ $product->stock_quantity ?? 0 }}</inventory-count>
-                <alcohol>{{ $product->attributes->where('name', "Alcoholpercentage")->first()->options[0] ?? 0 }}</alcohol>
-                <bottles size="750 ml">0</bottles>
+                <alcohol>{{ $product->attributes->where('name', "Alcoholpercentage")->first()->options[0] ?? '0.0%' }}</alcohol>
+                <bottles size="750 ml">{{ $product->stock_quantity ?? 0 }}</bottles>
                 <extra>
                     <product-id>{{ $product->id }}</product-id>
                     @if($product->vintage)

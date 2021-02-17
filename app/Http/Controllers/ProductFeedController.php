@@ -36,6 +36,8 @@ class ProductFeedController extends Controller
                 foreach($product->attributes->where('name', "Merk") as $land) {
                     $product->wine_name = $this->removeFromString($land->options[0], $product->wine_name);
                 }
+                $product->wine_name = $this->removeFromString(',', $product->wine_name);
+                $product->wine_name = $this->removeFromString('  ', $product->wine_name);
             } else {
                 $product->vintage = null;
             }
