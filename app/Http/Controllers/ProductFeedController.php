@@ -48,6 +48,6 @@ class ProductFeedController extends Controller
     }
 
     public function removeFromString($needle, $haystack) {
-        return trim(str_replace($needle, '', $haystack));
+        return trim(str_ireplace($needle, '', $haystack));
     }
 }
