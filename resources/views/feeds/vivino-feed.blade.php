@@ -1,9 +1,7 @@
 {!! '<?xml version="1.0" encoding="UTF-8"?>' !!}
 <vivino-product-list>
     @foreach($products as $product)
-        @if($product->stock_quantity !== null
-        // && $product->attributes->where('name', "Alcoholpercentage")->count() > 0
-        && $product->attributes->where('name', "Merk")->count() > 0)
+        @if($product->producer !== null)
             <product>
                 <product-name>{{ $product->producer }} {{ $product->wine_name }} {{ $product->vintage }}</product-name>
                 <price>{{ $product->price }}</price>
