@@ -30,8 +30,8 @@ class ProductFeedController extends Controller
                 $product->vintage = count($matches) > 0 ? $matches[0] : 'NV';
                 $product->producer = $product->attributes->where('name', "Producent")->first()->options[0];
                 $product->wine_name = ucwords($product->attributes->where('name', "Vivino naam")->first()->options[0]);
-                return $product;
             }
+            return $product;
         });
         $view = \View::make('feeds.vivino-feed')->with(compact('products'));
         return response()->make($view, 200)->header('Content-Type', 'application/xml');
