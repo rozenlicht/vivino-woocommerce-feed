@@ -17,13 +17,16 @@ class ProductFeedController extends Controller
         }))->map(function($product) {
             $product->attributes = collect($product->attributes);
             $matches = [];
+            $product->producer = null;
+            $product->wine_name = null;
+            $product->vintage = null;
+            $product->alcohol = null;
             preg_match('/\b(19|20)\d{2}\b/', $product->name, $matches);
             if((count($matches) > 0 || Str::contains($product->name, ' NV'))
                 && $product->attributes->where('name', "Producent")->count() > 0
                 && $product->attributes->where('name', "Vivino naam")->count() > 0
                 && $product->attributes->where('name', "Streek")->count() > 0
             ) {
-                $product->alcohol = null;
                 if($product->attributes->where('name', "Alcoholpercentage")->count() > 0) {
                     $product->alcohol = $product->attributes->where('name', "Alcoholpercentage")->first()->options[0];
                 }
