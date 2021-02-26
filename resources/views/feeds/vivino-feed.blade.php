@@ -5,11 +5,13 @@
         // && $product->attributes->where('name', "Alcoholpercentage")->count() > 0
         && $product->attributes->where('name', "Merk")->count() > 0)
             <product>
-                <product-name>{{ $product->producer }} {{ $product->wine_name }} {{ $product->appellation }} {{ $product->vintage }}</product-name>
+                <product-name>{{ $product->producer }} {{ $product->wine_name }} {{ $product->vintage }}</product-name>
                 <price>{{ $product->price }}</price>
                 <link>{{ $product->permalink }}</link>
                 <inventory-count>{{ $product->stock_quantity ?? 0 }}</inventory-count>
-                <alcohol>{{ $product->attributes->where('name', "Alcoholpercentage")->first()->options[0] ?? '0.0%' }}</alcohol>
+                @if($product->alcohol)
+                    <alcohol>{{ $product->alcohol }}</alcohol>
+                @endif
                 <bottles size="750 ml">{{ $product->stock_quantity ?? 0 }}</bottles>
                 <extra>
                     <product-id>{{ $product->id }}</product-id>

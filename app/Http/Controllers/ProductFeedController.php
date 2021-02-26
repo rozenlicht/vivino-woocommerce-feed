@@ -18,31 +18,20 @@ class ProductFeedController extends Controller
             $product->attributes = collect($product->attributes);
             $matches = [];
             preg_match('/\b(19|20)\d{2}\b/', $product->name, $matches);
-            if(count($matches) > 0
-                && $product->attributes->where('name', "Streek")->count() > 0
-                && $product->attributes->where('name', "Merk")->count() > 0
+            if((count($matches) > 0 || Str::contains($product->name, ' NV'))
+                && $product->attributes->where('name', "Producent")->count() > 0
+                && $product->attributes->where('name', "Vivino naam")->count() > 0
             ) {
-                $product->vintage = $matches[0];
-                $product->producer = $product->attributes->where('name', "Merk")->first()->options[0];
+                $product->alcohol = null;
+                if($product->attributes->where('name', "Alcoholpercentage")->count() > 0) {
+                    $product->alcohol = $product->attributes->where('name', "Alcoholpercentage")->first()->options[0];
+                }
+                $product->vintage = count($matches) > 0 ? $matches[0] : 'NV';
+                $product->producer = $product->attributes->where('name', "Producent")->first()->options[0];
+                $product->wine_name = ucwords($product->attributes->where('name', "Vivino naam")->first()->options[0]);
                 $product->appellation = ucwords($product->attributes->where('name', "Streek")->first()->options[0]);
-                $product->wine_name = $this->removeFromString($product->vintage, $product->name);
-                $product->wine_name = $this->removeFromString($product->appellation, $product->wine_name);
-                foreach($product->attributes->where('name', "Land") as $land) {
-                    $product->wine_name = $this->removeFromString($land->options[0], $product->wine_name);
-                }
-                foreach($product->attributes->where('name', "Streek") as $land) {
-                    $product->wine_name = $this->removeFromString($land->options[0], $product->wine_name);
-                }
-                foreach($product->attributes->where('name', "Merk") as $land) {
-                    $product->wine_name = $this->removeFromString($land->options[0], $product->wine_name);
-                }
-                $product->wine_name = $this->removeFromString(',', $product->wine_name);
-                $product->wine_name = $this->removeFromString('  ', $product->wine_name);
-                $product->wine_name = $this->removeFromString('  ', $product->wine_name);
-            } else {
-                $product->vintage = null;
+                return $product;
             }
-            return $product;
         });
         $view = \View::make('feeds.vivino-feed')->with(compact('products'));
         return response()->make($view, 200)->header('Content-Type', 'application/xml');
