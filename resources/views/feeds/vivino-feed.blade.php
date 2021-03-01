@@ -28,12 +28,16 @@
                         @endif
                     @endif
                     <contains-added-sulfites>yes</contains-added-sulfites>
-                    <contains-milk-allergens>
-                        @if($product->attributes->where('name', "Bevat melkallergenen")->count() > 0){{ $product->attributes->where('name', "Bevat melkallergenen")->first()->options[0] === 'Ja' ? 'yes' : 'no' }}@else no @endif
-                    </contains-milk-allergens>
-                    <contains-egg-allergens>
-                        @if($product->attributes->where('name', "Bevat ei-allergenen")->count() > 0){{ $product->attributes->where('name', "Bevat ei-allergenen")->first()->options[0] === 'Ja' ? 'yes' : 'no' }}@else no @endif
-                    </contains-egg-allergens>
+                    @if($product->attributes->where('name', "Bevat melkallergenen")->count() > 0)
+                        <contains-milk-allergens>{{ $product->attributes->where('name', "Bevat melkallergenen")->first()->options[0] === 'Ja' ? 'yes' : 'no' }}</contains-milk-allergens>
+                    @else
+                        <contains-milk-allergens>no</contains-milk-allergens>
+                    @endif
+                    @if($product->attributes->where('name', "Bevat ei-allergenen")->count() > 0)
+                        <contains-egg-allergens>{{ $product->attributes->where('name', "Bevat ei-allergenen")->first()->options[0] === 'Ja' ? 'yes' : 'no' }}</contains-egg-allergens>
+                    @else
+                        <contains-egg-allergens>no</contains-egg-allergens>
+                    @endif
                 </extra>
             </product>
         @endif
