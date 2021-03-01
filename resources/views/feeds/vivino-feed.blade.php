@@ -29,18 +29,10 @@
                     @endif
                     <contains-added-sulfites>yes</contains-added-sulfites>
                     <contains-milk-allergens>
-                        @if($product->attributes->where('name', "Bevat melkallergenen")->count() > 0)
-                            {{ $product->attributes->where('name', "Bevat melkallergenen")->first()->options[0] === 'Ja' ? 'yes' : 'no' }}
-                        @else
-                            no
-                        @endif
+                        @if($product->attributes->where('name', "Bevat melkallergenen")->count() > 0){{ $product->attributes->where('name', "Bevat melkallergenen")->first()->options[0] === 'Ja' ? 'yes' : 'no' }}@else no @endif
                     </contains-milk-allergens>
                     <contains-egg-allergens>
-                        @if($product->attributes->where('name', "Bevat ei-allergenen")->count() > 0)
-                            {{ $product->attributes->where('name', "Bevat ei-allergenen")->first()->options[0] === 'Ja' ? 'yes' : 'no' }}
-                        @else
-                            no
-                        @endif
+                        @if($product->attributes->where('name', "Bevat ei-allergenen")->count() > 0){{ $product->attributes->where('name', "Bevat ei-allergenen")->first()->options[0] === 'Ja' ? 'yes' : 'no' }}@else no @endif
                     </contains-egg-allergens>
                 </extra>
             </product>
