@@ -10,7 +10,7 @@
                 @if($product->alcohol)
                     <alcohol>{{ $product->alcohol }}</alcohol>
                 @endif
-                <bottles size="750 ml">{{ $product->stock_quantity ?? 0 }}</bottles>
+                <bottles size="750 ml">1</bottles>
                 <extra>
                     <product-id>{{ $product->id }}</product-id>
                     @if($product->vintage)
