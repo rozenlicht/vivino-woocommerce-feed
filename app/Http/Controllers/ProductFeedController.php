@@ -11,6 +11,7 @@ class ProductFeedController extends Controller
 {
     public function vivino()
     {
+        $no_vintage = [];
         $products = collect(\Cache::remember('vivino-products', 60*60, function() {
             $woo = new WooCommerceService();
             return $woo->getByTagSlug('vivino-wijn');
@@ -36,10 +37,12 @@ class ProductFeedController extends Controller
                 }
                 $product->wine_name = ucwords($product->attributes->where('name', "Vivino naam")->first()->options[0]);
                 $product->appellation = ucwords($product->attributes->where('name', "Streek")->first()->options[0]);
+            } else {
+                $no_vintage[] = $product;
             }
             return $product;
         });
-        dd($products->where('wine_name')->count());
+        dd($no_vintage);
         $view = \View::make('feeds.vivino-feed')->with(compact('products'));
         return response()->make($view, 200)->header('Content-Type', 'application/xml');
     }
