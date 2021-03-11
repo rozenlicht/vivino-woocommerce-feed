@@ -24,7 +24,6 @@ class ProductFeedController extends Controller
             $product->appellation = null;
             preg_match('/\b(19|20)\d{2}\b/', $product->name, $matches);
             if((count($matches) > 0 || Str::contains($product->name, ' NV'))
-                && $product->attributes->where('name', "Producent")->count() > 0
                 && $product->attributes->where('name', "Vivino naam")->count() > 0
                 && $product->attributes->where('name', "Streek")->count() > 0
             ) {
