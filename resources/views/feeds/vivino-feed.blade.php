@@ -1,9 +1,9 @@
 {!! '<?xml version="1.0" encoding="UTF-8"?>' !!}
 <vivino-product-list>
     @foreach($products as $product)
-        @if($product->producer !== null)
+        @if($product->wine_name !== null)
             <product>
-                <product-name>{{ $product->producer }} {{ $product->wine_name }} {{ $product->vintage }}</product-name>
+                <product-name>{{ $product->wine_name }}</product-name>
                 <price>{{ $product->price }}</price>
                 <link>{{ $product->permalink }}</link>
                 <inventory-count>{{ $product->stock_quantity ?? 0 }}</inventory-count>
