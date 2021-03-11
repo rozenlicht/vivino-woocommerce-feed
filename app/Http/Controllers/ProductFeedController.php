@@ -43,7 +43,6 @@ class ProductFeedController extends Controller
             }
             return $product;
         });
-        dd($products->count());
         $view = \View::make('feeds.vivino-feed')->with(compact('products'));
         return response()->make($view, 200)->header('Content-Type', 'application/xml');
     }
