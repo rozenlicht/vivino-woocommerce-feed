@@ -31,7 +31,9 @@ class ProductFeedController extends Controller
                     $product->alcohol = $product->attributes->where('name', "Alcoholpercentage")->first()->options[0];
                 }
                 $product->vintage = count($matches) > 0 ? $matches[0] : 'NV';
-                $product->producer = $product->attributes->where('name', "Producent")->first()->options[0];
+                if($product->attributes->where('name', "Producent")->exists()) {
+                    $product->producer = $product->attributes->where('name', "Producent")->first()->options[0];
+                }
                 $product->wine_name = ucwords($product->attributes->where('name', "Vivino naam")->first()->options[0]);
                 $product->appellation = ucwords($product->attributes->where('name', "Streek")->first()->options[0]);
             }
